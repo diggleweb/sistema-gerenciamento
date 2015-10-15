@@ -33,13 +33,13 @@ $usuarioDao = new UsuarioDAO();
 
 /* Manda buscar os dados do usuário com e-mail igual ao recebido de index.php*/
 /* Se não encontrar nada no banco de dados, retorna null */
-$usuario = usuarioDao->buscaPorEmail($email);
+$usuario = $usuarioDao->buscaPorEmail($email);
 
 
 
 /* Testa se encontrou algum usuário cadastrado com aquele e-mail */
 if($usuario != null){
-	/* Criptografa a senha recebida de index.php */
+	/* Criptografa a senha recebida de index.php pra poder comparar */
 	$senhaCriptografada = md5($senha);
 
 	/* Agora testa se a senha recebida é igual à que consta do banco de dados*/
