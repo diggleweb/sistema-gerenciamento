@@ -9,7 +9,19 @@
 <body>
 <div id="interface">
 
+	<form action="script/LoginProcessamento.php" method="post">
+	<fieldset id="login"><legend>Login de Usuário</legend>
 
+		<p><label for="txtEmail">E-mail:</label>
+		<input type="text" id="idEmail" name"nEmail"/></p>
+
+		<p><label for="txtSenha">Senha:&nbsp;</label>
+		<input type="password" id="idSenha" name"nSenha"/></p>
+		
+		<p><input type="submit" value="vLogin"/></p>
+	
+	</fieldset>
+	</form>
 
 </div>
 </body>
