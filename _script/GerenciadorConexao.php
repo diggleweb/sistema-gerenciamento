@@ -18,12 +18,12 @@ class GerenciadorConexao{
 	public static function conectar(){
 
 		/* Abre uma conexão com o servidor MySQL e retorna um identificador */
-		$conexao = mysql_connect("localhost", "root", "Junior89")
-		or die('Nao foi possível estabelecer a conexão: ' . mysql_error() );
+		$conexao = mysqli_connect("127.0.0.1", "root", "Junior89","SistemaGerenciamentoLoja") or print(mysql_error());
+		//or die('Não foi possível estabelecer a conexão: ' . mysql_error() );
 		
-		/* Seleciona qual banco de dados será utilizado na conexão */
-		mysql_select_db("SistemaGerenciamentoLoja", $conexao)
-		or die('Banco de dados não encontrado: ' . mysql_error() );	
+		/* Verifica se a conexão com o banco foi bem sucedida */
+		if( mysqli_connect_errno() )
+  			echo "Falha ao conectar no banco de dados MySQL: " . mysqli_connect_error();
 		
 		/* Retorna o identificador da conexão que será utilizado mais tarde */
 		/* Para fechar a conexão */

@@ -21,11 +21,9 @@ ini_set('display_errors', 1);
 require_once("UsuarioDAO.php");
 
 
-
 /* Pega variáveis que vieram de index.php no método POST */
 $email = $_POST["nEmail"];
 $senha = $_POST["nSenha"];
-
 
 
 /* Cria novo objeto da classe UsuarioDAO */
@@ -47,20 +45,20 @@ if($usuario != null){
 		/* Seta variáveis de sessão com informações do usuario logado*/
 		$_SESSION['id_usuario_logado'] = $usuario->idusuario;
 		$_SESSION['nome_usuario_logado'] = $usuario->nome;
+		$_SESSION['email_usuario_logado'] = $usuario->email;
 		$_SESSION['permissao_usuario_logado'] = $usuario->admin;
 
+		//print_r($usuario);
 		header('Location: ../console.php');
 	}
 	/* Caso a senha esteja incorreta gera ERRO 1*/
-	else{
+	else
 		header('Location: ../index.php?ERRO=1');
-	}
 
-/* Caso não tenha encontrado nenhum e-mail válido no banco de dados */
-else{
-	header('Location: ../index.php?ERRO=1')
-	}
 }
+/* Caso não tenha encontrado nenhum e-mail válido no banco de dados */
+else
+	header('Location: ../index.php?ERRO=2')
 
 
 ?>
