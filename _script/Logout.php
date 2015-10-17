@@ -10,13 +10,13 @@
  *
  *----------------------------------------------------------------------------*/
 
-/* Declara seção do navegador */
-session_start();
+/* Declara sessão do navegador */
+session_start("login");
 
-/* Limpa todas variáveis de seção */
+/* Limpa todas variáveis de sessão */
 session_unset();
 
-/* Destrói seção */
+/* Destrói sessão */
 session_destroy();
 
 /* Redireciona usuário para página inicial de login*/

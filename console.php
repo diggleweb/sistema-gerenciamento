@@ -1,5 +1,10 @@
 <?php
 session_start("login");
+
+/* Testa se a variável de sessão está setada corretamente */
+/* Caso contrário, gera erro acusando que o login não foi feito */
+if( !isset($_SESSION["nome_usuario_logado"]) )
+	header('Location: index.php?ERRO=2');
 ?>
 
 

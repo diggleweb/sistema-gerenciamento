@@ -10,7 +10,7 @@
  *
  *----------------------------------------------------------------------------*/
 
-/* Inicia nova seção de navegação onde é possível setar variáveis de seção */
+/* Inicia nova sessão de navegação onde é possível setar variáveis de seção */
 session_start("login");
 /* Configura diretivas de processamento p/ mostrar e reportar erros do código*/
 ini_set('error_reporting', E_ALL|E_STRICT);
@@ -56,9 +56,9 @@ if($usuario != null){
 		header('Location: ../index.php?ERRO=1');
 
 }
-/* Caso não tenha encontrado nenhum e-mail válido no banco de dados */
+/* Caso não tenha encontrado nenhum e-mail válido no banco de dados gera ERRO 1 */
 else
-	header('Location: ../index.php?ERRO=2')
+	header('Location: ../index.php?ERRO=1')
 
 
 ?>
