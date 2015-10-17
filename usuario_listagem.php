@@ -15,14 +15,17 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 <html lan="pt-br">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Sistema de Gerenciamento | Usuários</title>
+	<title>Sistema de Gerenciamento | Listagem de Usuários</title>
 </head>
 
 
 <body>
 <div id="interface">
 
-	<h1>Manutenção de Usuários</h1>
+	<h1>Listagem de Usuários</h1>
+
+
+	<a href="usuario_formulario.php?acao=cadastrar">Cadastrar</a><br/><br/>
 
 
 	<!-- Tabela que lista usuários cadastrados no sistema -->
@@ -33,7 +36,7 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 			<th>Permissão</th>
 			<th>Ação</th>
 		</tr>
-		<!-- Busca todos usuários cadastrados no baco-->
+		<!-- Busca todos usuários cadastrados no banco-->
 		<?php  
 			$usuarioDao = new UsuarioDAO();
 			$lista = $usuarioDao->listar();
@@ -49,7 +52,7 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 						elseif($usuario->admin == 1)
 							echo "Admin";
 				?></td>
-				<!-- Imprime links para editar ou excluir usuário -->
+				<!-- Imprime links (opções) na últim coluna para editar ou excluir usuário -->
 				<td>
 					<a href="usuario_formulario.php?acao=editar&idusuario=<?php echo $usuario->idusuario; ?>">Editar</a>
 					&nbsp;&nbsp;
@@ -60,7 +63,7 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 	</table>
 
 
-	<br/><br/><a href="console.php">Voltar</a>
+	<br/><br/><br/><a href="console.php">Voltar</a>
 
 </div>
 </body>
