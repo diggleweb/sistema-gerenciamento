@@ -25,6 +25,7 @@ Olá, <?php echo $_SESSION["nome_usuario_logado"]; ?>. Seja bem-vindo!<br/><br/>
 	<?php if(isset($_SESSION["permissao_usuario_logado"]) && $_SESSION["permissao_usuario_logado"] == "1"){ ?>
 		<a href="usuario_listagem.php">Usuário</a><br/>
 	<?php } ?>
+	<a href="_script/Logout.php">Estoque</a>
 	<a href="_script/Logout.php">Logout</a>
 
 </div>

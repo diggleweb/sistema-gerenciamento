@@ -52,7 +52,7 @@ class UsuarioDAO{
  		public function inserir($usuario){
 
  			/* Primeiro cria a query do MySQL */
- 			$insert_query =	"INSERT INTO usuario (idusuario, nome, email, senha, admin) VALUES (DEFAULT, '".$usuario->nome."', '".$usuario->email."', '".md5($usuario->senha)."', ".$usuario->admin.")";
+ 			$insert_query =	"INSERT INTO usuario (idusuario, nome, sobrenome, email, senha, admin) VALUES (DEFAULT,'".$usuario->nome."','".$usuario->sobrenome."','".$usuario->email."','".md5($usuario->senha)."',".$usuario->admin.")";
 			
 			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $insert_query)
@@ -66,7 +66,7 @@ class UsuarioDAO{
  		public function atualizar($usuario){
  			
  			/* Primeiro cria a query do MySQL */
- 			$update_query =	"UPDATE usuario SET nome  = '".$usuario->nome."', email = '".$usuario->email."', senha = '".md5($usuario->senha)."', admin = ".$usuario->admin." WHERE idusuario = " . $usuario->idusuario;
+ 			$update_query =	"UPDATE usuario SET nome='".$usuario->nome."', sobrenome='".$usuario->sobrenome."', email='".$usuario->email."', senha = '".md5($usuario->senha)."', admin= ".$usuario->admin." WHERE idusuario=".$usuario->idusuario;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $update_query)
@@ -110,6 +110,7 @@ class UsuarioDAO{
  				//Preenche todos os campos do novo objeto
  				$retorno->idusuario = $row["idusuario"];
  				$retorno->nome = $row["nome"];
+ 				$retorno->sobrenome = $row["sobrenome"];
  				$retorno->email = $row["email"];
  				$retorno->senha = $row["senha"];
  				$retorno->admin = $row["admin"];
@@ -143,6 +144,7 @@ class UsuarioDAO{
  				//Preenche todos os campos do novo objeto
  				$retorno->idusuario = $row["idusuario"];
  				$retorno->nome = $row["nome"];
+ 				$retorno->sobrenome = $row["sobrenome"];
  				$retorno->email = $row["email"];
  				$retorno->senha = $row["senha"];
  				$retorno->admin = $row["admin"];
@@ -174,6 +176,41 @@ class UsuarioDAO{
  				//Preenche todos os campos do novo objeto
  				$retorno->idusuario = $row["idusuario"];
  				$retorno->nome = $row["nome"];
+ 				$retorno->sobrenome = $row["sobrenome"];
+ 				$retorno->email = $row["email"];
+ 				$retorno->senha = $row["senha"];
+ 				$retorno->admin = $row["admin"];
+ 				//Coloca no array
+ 				$lista[] = $retorno;
+ 			}
+
+ 			return $lista;
+
+ 		}
+
+
+
+ 		/*  */
+ 		public function buscaPorSobrenome($sobrenome){
+
+ 			/* Primeiro cria a query do MySQL */
+ 			$nome_query = "SELECT * FROM usuario WHERE sobrenome LIKE = '%".$sobrenome."%' ORDER BY nome";
+
+ 			/* Envia a query para o banco de dados e verifica se funcionou */
+ 			$result = mysqli_query($this->conexao, $nome_query)
+ 			or die("Erro ao listar usuários por nome: " . mysql_error() );
+
+ 			/* Cria um array que receberá as linhas da tabela */
+ 			$lista = array();
+
+ 			/* Loop que que vai pegando linha por linha do resultado obtido */
+ 			while( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) ){
+ 				//Cria nova instância da classe Usuario
+ 				$retorno = new Usuario();
+ 				//Preenche todos os campos do novo objeto
+ 				$retorno->idusuario = $row["idusuario"];
+ 				$retorno->nome = $row["nome"];
+ 				$retorno->sobrenome = $row["sobrenome"];
  				$retorno->email = $row["email"];
  				$retorno->senha = $row["senha"];
  				$retorno->admin = $row["admin"];
@@ -207,6 +244,7 @@ class UsuarioDAO{
  				//Preenche todos os campos do novo objeto
  				$retorno->idusuario = $row["idusuario"];
  				$retorno->nome = $row["nome"];
+ 				$retorno->sobrenome = $row["sobrenome"];
  				$retorno->email = $row["email"];
  				$retorno->senha = $row["senha"];
  				$retorno->admin = $row["admin"];

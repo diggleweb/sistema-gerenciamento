@@ -25,7 +25,7 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 	<h1>Listagem de Usuários</h1>
 
 
-	<a href="usuario_formulario.php?acao=cadastrar">Cadastrar</a><br/><br/>
+	<a href="usuario_cadastrar.php">Cadastrar</a><br/><br/>
 
 
 	<!-- Tabela que lista usuários cadastrados no sistema -->
@@ -44,7 +44,7 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 		<!-- Imprime na tabela em HTML os usuários utilizando o PHP -->
 		<?php foreach ($lista as $indice => $usuario) { ?>
 			<tr>
-				<td><?php echo $usuario->nome; ?></td>
+				<td><?php echo "$usuario->nome $usuario->sobrenome"; ?></td>
 				<td><?php echo $usuario->email; ?></td>
 				<td><?php
 						if($usuario->admin == 0)
@@ -54,9 +54,9 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 				?></td>
 				<!-- Imprime links (opções) na últim coluna para editar ou excluir usuário -->
 				<td>
-					<a href="usuario_formulario.php?acao=editar&idusuario=<?php echo $usuario->idusuario; ?>">Editar</a>
+					<a href="usuario_editar.php?idusuario=<?php echo $usuario->idusuario; ?>">Editar</a>
 					&nbsp;&nbsp;
-					<a href="usuario_formulario.php?acao=excluir&idusuario=<?php echo $usuario->idusuario; ?>">Excluir</a>
+					<a href="usuario_excluir.php?idusuario=<?php echo $usuario->idusuario; ?>">Excluir</a>
 				</td>
 			</tr>
 		<?php } ?>

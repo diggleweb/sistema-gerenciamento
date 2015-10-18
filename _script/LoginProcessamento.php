@@ -45,6 +45,7 @@ if($usuario != null){
 		/* Seta variáveis de sessão com informações do usuario logado*/
 		$_SESSION['id_usuario_logado'] = $usuario->idusuario;
 		$_SESSION['nome_usuario_logado'] = $usuario->nome;
+		$_SESSION['sobrenome_usuario_logado'] = $usuario->nome;
 		$_SESSION['email_usuario_logado'] = $usuario->email;
 		$_SESSION['permissao_usuario_logado'] = $usuario->admin;
 

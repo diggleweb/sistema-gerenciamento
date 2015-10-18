@@ -14,6 +14,7 @@ if( $acao == "editar" || $acao == "cadastrar" ) {
 	$usuario = new Usuario();
 	$usuario->idusuario = $_POST["nIdUsuario"];
 	$usuario->nome = $_POST["nNome"];
+	$usuario->sobrenome = $_POST["nSobrenome"];
 	$usuario->email = $_POST["nEmail"];
 	$usuario->senha = $_POST["nSenha"];
 	
