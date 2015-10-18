@@ -12,7 +12,7 @@ if( $acao == "editar" || $acao == "cadastrar" ) {
 	$usuario->idusuario = $_POST["nIdUsuario"];
 	$usuario->nome = $_POST["nNome"];
 	$usuario->sobrenome = $_POST["nSobrenome"];
-	$usuario->email = $_POST["nEmail"];
+	$usuario->email = strtolower($_POST["nEmail"]);
 	$usuario->senha = $_POST["nSenha"];
 	
 	if( $_POST["nPermissao"] == "normal" )

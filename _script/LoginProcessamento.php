@@ -22,7 +22,7 @@ require_once("UsuarioDAO.php");
 
 
 /* Pega variáveis que vieram de index.php no método POST */
-$email = $_POST["nEmail"];
+$email = strtolower($_POST["nEmail"]);
 $senha = $_POST["nSenha"];
 
 
