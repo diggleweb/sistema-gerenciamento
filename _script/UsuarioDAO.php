@@ -17,10 +17,8 @@ include_once "GerenciadorConexao.php";
 
 class UsuarioDAO{
 
-
 	/* Variável privada que armazena o identificador da conexão com o banco */
 	private $conexao = null;
-
 
 		/* Construtor da classe: estabelece conexão com o banco */
 		/* Utiliza o método estático da classe GerenciadorConexao */
@@ -29,14 +27,12 @@ class UsuarioDAO{
 			$this->conexao = GerenciadorConexao::conectar();
 		}
 
-
 		/* Destrutor da classe: finaliza conexão com o banco */
 		public function __destruct(){
 			/* Verifica se a conexão havia sido estabelecida anteriormente */
 			if($this->conexao)
 				mysqli_close($this->conexao);
 		}
-
 
 /* -----------------------------------------------------------------------------
  * Aqui começa a implementação do CRUD
@@ -46,7 +42,6 @@ class UsuarioDAO{
  * U = Update 		-> 		Atualiza linhas da tabela
  * D = delete 		->		Deleta linhas da tabela
  -----------------------------------------------------------------------------*/
-
 
  		/*Função para inserir novo usuário na tabela usuario do banco de dados*/
  		public function inserir($usuario){
@@ -60,8 +55,6 @@ class UsuarioDAO{
 
  		}
 
-
-
  		/* Função para atualizar os dados de um dos usuários já cadastrados */
  		public function atualizar($usuario){
  			
@@ -74,7 +67,17 @@ class UsuarioDAO{
  							
  		}
 
+		/* Função para atualizar os dados de um dos usuários semm modificar a senha */
+ 		public function atualizarSemSenha($usuario){
 
+ 			/* Primeiro cria a query do MySQL */
+ 			$update_query =	"UPDATE usuario SET nome='".$usuario->nome."', sobrenome='".$usuario->sobrenome."', email='".$usuario->email."', admin= ".$usuario->admin." WHERE idusuario=".$usuario->idusuario;
+
+ 			/* Envia a query para o banco de dados e verifica se funcionou */
+			mysqli_query($this->conexao, $update_query)
+			or die("Erro ao atualizar usuário: " . mysql_error() );
+
+ 		}
 
  		/* Função para excluir uma entrada de usuário do banco de dados */
  		public function excluir($id){
@@ -87,8 +90,6 @@ class UsuarioDAO{
 			or die("Erro ao excluir usuário: " . mysql_error() );
 
  		}
-
-
 
  		/* Função que lista todos os usuários e devolve em ordem alfabética */
  		public function listar(){
@@ -122,8 +123,6 @@ class UsuarioDAO{
 
  		}
 
-
-
  		/*  */
  		public function buscaPorId($id){
 
@@ -153,8 +152,6 @@ class UsuarioDAO{
  			return $retorno;
 
  		}
-
-
 
  		/*  */
  		public function buscaPorNome($nome){
@@ -188,8 +185,6 @@ class UsuarioDAO{
 
  		}
 
-
-
  		/*  */
  		public function buscaPorSobrenome($sobrenome){
 
@@ -222,8 +217,6 @@ class UsuarioDAO{
 
  		}
 
-
-
  		/*  */
  		public function buscaPorEmail($email){
 
@@ -254,7 +247,5 @@ class UsuarioDAO{
 
  		}
 
-
 }
-
 ?>
