@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------------------------------------------------
- * _script/usuarioDAO.php
+ * _script/UsuarioDAO.php
  *
  *
  *
@@ -127,7 +127,7 @@ class UsuarioDAO{
  		public function buscaPorId($id){
 
  			/* Primeiro cria a query do MySQL */
- 			$id_query = "SELECT * FROM usuario WHERE idusuario = '".$id."'";
+ 			$id_query = "SELECT * FROM usuario WHERE idusuario = ".$id;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $id_query)
@@ -157,7 +157,7 @@ class UsuarioDAO{
  		public function buscaPorNome($nome){
 
  			/* Primeiro cria a query do MySQL */
- 			$nome_query = "SELECT * FROM usuario WHERE nome LIKE = '%".$nome."%' ORDER BY nome";
+ 			$nome_query = "SELECT * FROM usuario WHERE nome LIKE '%".$nome."%' ORDER BY nome";
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $nome_query)
@@ -193,7 +193,7 @@ class UsuarioDAO{
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $nome_query)
- 			or die("Erro ao listar usuários por nome: " . mysql_error() );
+ 			or die("Erro ao listar usuários por sobrenome: " . mysql_error() );
 
  			/* Cria um array que receberá as linhas da tabela */
  			$lista = array();

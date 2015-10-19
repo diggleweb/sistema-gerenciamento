@@ -21,11 +21,11 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 
 Olá, <?php echo $_SESSION["nome_usuario_logado"]; ?>. Seja bem-vindo!<br/><br/>
 
-	<!-- Verifica a existência de erro no processo de Login -->
+	<!-- Somente usuários com permissão Admin podem editar Usuários -->
 	<?php if(isset($_SESSION["permissao_usuario_logado"]) && $_SESSION["permissao_usuario_logado"] == "1"){ ?>
 		<a href="usuario_listagem.php">Usuário</a><br/>
 	<?php } ?>
-	<a href="_script/Logout.php">Estoque</a>
+	<a href="_script/Logout.php">Estoque</a><br/>
 	<a href="_script/Logout.php">Logout</a>
 
 </div>
