@@ -83,7 +83,7 @@ class UsuarioDAO{
  		public function excluir($id){
 
  			/* Primeiro cria a query do MySQL */
- 			$delete_query = "DELETE FROM usuario WHERE idusuario = " . $id;
+ 			$delete_query = "DELETE FROM usuario WHERE idusuario = ".$id;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $delete_query)
