@@ -15,7 +15,7 @@ include 'Produto.php';
 include_once "GerenciadorConexao.php";
 
 
-class produtoDAO{
+class ProdutoDAO{
 
 	/* Variável privada que armazena o identificador da conexão com o banco */
 	private $conexao = null;
@@ -176,6 +176,38 @@ class produtoDAO{
 
  		}
 
+ 		/* Função que busca todos produtos cadastrados em determinada categoria */
+		public function buscaPorCategoria($idcategoria){
+
+ 			/* Primeiro cria a query do MySQL */
+ 			$id_query = "SELECT * FROM produto WHERE idcategoria = ".$idcategoria;
+
+ 			/* Envia a query para o banco de dados e verifica se funcionou */
+ 			$result = mysqli_query($this->conexao, $id_query)
+ 			or die("Erro ao buscar produtos por categoria cadastrada: " . mysql_error() );
+
+ 			/* Cria um array que receberá as linhas da tabela */
+ 			$lista = array();
+
+ 			/* Loop que que vai pegando linha por linha do resultado obtido */
+ 			while( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) ){
+ 				//Cria nova instância da classe Usuario
+ 				$retorno = new Produto();
+ 				//Preenche todos os campos do novo objeto
+ 				$retorno->idproduto = $row["idproduto"];
+ 				$retorno->nome = $row["nome"];
+ 				$retorno->quantidade = $row["quantidade"];
+ 				$retorno->custo = $row["custo"];
+ 				$retorno->preco = $row["preco"];
+ 				$retorno->descricao = $row["descricao"];
+ 				$retorno->idcategoria = $row["idcategoria"];
+ 				//Coloca no array
+ 				$lista[] = $retorno;
+ 			}
+
+ 			return $lista;
+ 		}
+}
 
 }
 ?>
