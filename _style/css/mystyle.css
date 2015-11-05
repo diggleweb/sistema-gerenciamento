@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+
+div#form-log-in{
+	margin-top: 60px;
+	width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#conteudo{
+  margin-top: 0px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#form{
+  margin-top: 0px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.contorno{
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 20px;
+  padding-bottom: 10px;
+  margin: 40px auto 40px auto;
+}
+div.contorno h4{
+  margin: 0px;
+}
+div.contorno hr{
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+div.col-sm-1 label{
+  margin-top: 6px;
+}
+
+table th{
+  text-align: center;
+  font-size: 16px;
+}
+
+table td{
+  text-align: center;
+}
+
+button#btn-log-in{
+	margin-top: 10px;
+}
+
+/* <div> do Bootstrap dentro do <form> */
+.input-group{
+	margin-bottom: 10px;
+}
+
+span#menu-title{
+  color: navy;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+li ul{
+  margin-left: 30px;
+}
+
+p#red-text{
+  color: red;
+}
+
+
+/******************************************************************
+ *
+ * Regras de estilo para componentes do Dashboard
+ *
+ *****************************************************************/
+.navbar-static-top{
+  margin-bottom:20px;
+}
+
+i {
+  font-size:16px;
+}
+
+.nav > li > a{
+  color:#787878;
+}
+  
+footer{
+  margin-top:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+  background-color:#efefef;
+}
+
+/* count indicator near icons */
+.nav>li .count{
+  position: absolute;
+  bottom: 12px;
+  right: 6px;
+  font-size: 9px;
+  background: rgba(51,200,51,0.55);
+  color: rgba(255,255,255,0.9);
+  line-height: 1em;
+  padding: 2px 4px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
