@@ -1,10 +1,19 @@
 <?php
 session_start("login");
 
-/* Testa se a variável de sessão está setada corretamente */
-/* Caso contrário, gera erro acusando que o login não foi feito */
+require_once("_script/UsuarioDAO.php");
+
+
+/* Testa se a variável de sessão está setada corretamente
+ * Caso contrário, gera erro acusando que o login não foi feito */
 if( !isset($_SESSION["nome_usuario_logado"]) )
 	header('Location: index.php?ERRO=2');
+
+
+/* Testa qual menu está acionado para já deixá-lo aberto */
+if( isset($_GET["page"]) )
+    $menu = $_GET["page"];
+
 ?>
 
 
