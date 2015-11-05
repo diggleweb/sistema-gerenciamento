@@ -60,20 +60,94 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 </div>
 <!-- /Header -->
 
+<!-- **************************************************************************************************** -->
+<!-- ***************************************** PARTE PRINCIPAL ****************************************** -->
+<!-- **************************************************************************************************** -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- **************************************************************************************** -->
+        <!-- ********************************** MENU LATERAL **************************************** -->
+        <!-- **************************************************************************************** -->
+        <div class="col-sm-3" id="sideBar">
+            <span id="menu-title"><span class="glyphicon glyphicon-briefcase"></span> Gerenciamento</span>
+
+            <hr>
+
+            <ul class="nav nav-stacked">
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuVendas">
+                    <span class="glyphicon glyphicon-usd"></span> <strong>Vendas</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    
+                    <ul class="nav nav-stacked collapse" id="menuVendas">
+                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Venda</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-object-align-right"></i> Estoque</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Vendas</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuCompras">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> <strong>Compras</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+
+                    <ul class="nav nav-stacked collapse" id="menuCompras">
+                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Compra</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-time"></i> Compras a Receber</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Compras</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuFluxo">
+                    <span class="glyphicon glyphicon-piggy-bank"></span> <strong>Fluxo de Caixa</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    
+                    <ul class="nav nav-stacked collapse" id="menuFluxo">
+                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Movimento</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-th-list"></i> Consultar</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-header"><a href="#" data-toggle="collapse">
+                    <span class="glyphicon glyphicon-stats"></span> <strong>Estatísticas</strong> </a>
+                </li>
+            </ul>
+
+            <hr>
+
+            <span id="menu-title"><i class="glyphicon glyphicon-wrench"></i> Configurações</span>
 <div id="interface">
 
-Olá, <?php echo $_SESSION["nome_usuario_logado"]; ?>. Seja bem-vindo!<br/><br/>
+            <hr>
 
-	<!-- Somente usuários com permissão Admin podem editar Usuários -->
-	<?php if(isset($_SESSION["permissao_usuario_logado"]) && $_SESSION["permissao_usuario_logado"] == "1"){ ?>
-		<a href="usuario_listagem.php">Usuário</a><br/>
-	<?php } ?>
-	<a href="produto_listagem.php">Estoque</a><br/>
-	<a href="categoria_listagem.php">Categorias</a><br/>
-	<a href="_script/Logout.php">Logout</a>
+            <ul class="nav nav-stacked">
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuProdutos">
+                    <span class="glyphicon glyphicon-barcode"></span> <strong>Produtos</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <ul class="nav nav-stacked collapse" id="menuProdutos">
+                        <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
+                    </ul>
+                </li>
 
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuClientes">
+                <span class="glyphicon glyphicon-user"></span> <strong>Clientes</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <ul class="nav nav-stacked collapse" id="menuClientes">
+                        <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuUsuario">
+                <span class="glyphicon glyphicon-screenshot"></span> <strong>Usuários</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <ul class="nav nav-stacked collapse <?php if( ($menu=='UsuariosConsultar')||($menu=='UsuariosCadastrar') ){ echo "in"; } ?>" id="menuUsuario">
+                        <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                        <li><a href="?page=UsuariosCadastrar"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /col-sm-3 -->
+    </div>
+    <!-- /row -->
 </div>
-</body>
+<!-- /container-fluid -->
 
 
 
