@@ -22,7 +22,44 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 </head>
 
 
+
 <body>
+<!-- **************************************************************************************************** -->
+<!-- ***************************************** MENU SUPERIOR FIXO *************************************** -->
+<!-- **************************************************************************************************** -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="console.php">Sistema de Gerenciamento</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                    	<span class="glyphicon glyphicon-user"></span>&nbsp;
+                    	<?php echo $_SESSION["nome_usuario_logado"]." ".$_SESSION["sobrenome_usuario_logado"]; ?>
+                    	<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="usuario_listagem.php"><i class="glyphicon glyphicon-asterisk"></i>&nbsp;&nbsp; Alterar Senha</a></li>
+                        <li class="divider"></li>
+                        <li><a href="_script/Logout.php"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp; Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    	<!-- /navbar --> 
+    </div>
+    <!-- /container-fluid -->
+</div>
+<!-- /Header -->
+
 <div id="interface">
 
 Olá, <?php echo $_SESSION["nome_usuario_logado"]; ?>. Seja bem-vindo!<br/><br/>
