@@ -111,7 +111,6 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
             <hr>
 
             <span id="menu-title"><i class="glyphicon glyphicon-wrench"></i> Configurações</span>
-<div id="interface">
 
             <hr>
 
@@ -144,6 +143,27 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 
         </div>
         <!-- /col-sm-3 -->
+
+
+        <!-- **************************************************************************************** -->
+        <!-- ******************************* CONTEÚDO DA PÁGINA ************************************* -->
+        <!-- **************************************************************************************** -->
+        <div class="col-sm-9">
+
+           <?php
+                switch ($_GET["page"]) {
+                    case "UsuariosConsultar":
+                        include('_paginas/usuario_listagem.php');
+                        break;
+                    case "UsuariosCadastrar":
+                        include('_paginas/usuario_cadastrar.php');
+                        break;
+                    default:
+                        include('_paginas/dashboard.php');
+                }
+           ?>
+
+        </div>
     </div>
     <!-- /row -->
 </div>
