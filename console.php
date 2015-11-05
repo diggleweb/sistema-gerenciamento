@@ -11,8 +11,14 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 <!DOCTYPE html>
 <html lan="pt-br">
 <head>
+	<title>Sistema de Gerenciamento</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8"/>
-	<title>Sistema de Gerenciamento | Console</title>
+	<meta name="generator" content="Jair Junior" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="_style/css/mystyle.css">
+	<link rel="stylesheet" type="text/css" href="_style/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 
@@ -32,4 +38,9 @@ Olá, <?php echo $_SESSION["nome_usuario_logado"]; ?>. Seja bem-vindo!<br/><br/>
 </div>
 </body>
 
+
+
+<script type="text/javascript" src="_style/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_style/js/scripts.js"></script>
+</body>
 </html>
