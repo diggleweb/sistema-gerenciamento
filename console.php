@@ -4,23 +4,25 @@ session_start("login");
 require_once("_script/UsuarioDAO.php");
 
 
-/* Testa se a variável de sessão está setada corretamente
- * Caso contrário, gera erro acusando que o login não foi feito */
-if( !isset($_SESSION["nome_usuario_logado"]) )
-	header('Location: index.php?ERRO=2');
+    /* Testa se a variável de sessão está setada corretamente
+     * Caso contrário, gera erro acusando que o login não foi feito */
+    if( !isset($_SESSION["nome_usuario_logado"]) )
+    	header('Location: index.php?ERRO=2');
 
 
-/* Pega variável de página "page"
- * Não deixa usuário normal acessar aquelas páginas que só admin podem */
-if( isset($_GET["page"]) ){
-    if( $_SESSION["permissao_usuario_logado"] == 1 )
-        $menu = $_GET["page"];
-    elseif( ($_SESSION["permissao_usuario_logado"] == 0) && ($_GET["page"] != "UsuariosCadastrar") )
+    /* Pega variável de página "page"
+     * Não deixa usuário normal acessar aquelas páginas que só admin podem */
+    if( isset($_GET["page"]) ){
+        if( $_SESSION["permissao_usuario_logado"] == 1 )
             $menu = $_GET["page"];
+        elseif( ($_SESSION["permissao_usuario_logado"] == 0) && ($_GET["page"] != "UsuariosCadastrar") )
+                $menu = $_GET["page"];
 }
 
-
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -35,6 +37,7 @@ if( isset($_GET["page"]) ){
 	<link rel="stylesheet" type="text/css" href="_style/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
+
 
 
 
@@ -75,89 +78,127 @@ if( isset($_GET["page"]) ){
 </div>
 <!-- /Header -->
 
+
+
 <!-- **************************************************************************************************** -->
 <!-- ***************************************** PARTE PRINCIPAL ****************************************** -->
 <!-- **************************************************************************************************** -->
 <div class="container-fluid">
     <div class="row">
-        <!-- **************************************************************************************** -->
-        <!-- ********************************** MENU LATERAL **************************************** -->
-        <!-- **************************************************************************************** -->
+        <!-- ************************************************************************ -->
+        <!-- ********************** MENU LATERAL ESQUERDO *************************** -->
+        <!-- ************************************************************************ -->
         <div class="col-sm-3" id="sideBar">
-            <span id="menu-title"><span class="glyphicon glyphicon-briefcase"></span> Gerenciamento</span>
+            
 
+            <!-- *********************************************** -->
+            <!-- ****** INÍCIO DOS MENUS DE GERENCIAMENTO ****** -->
+            <!-- *********************************************** -->
+            <span id="menu-title"><span class="glyphicon glyphicon-briefcase"></span> Gerenciamento</span>
             <hr>
 
             <ul class="nav nav-stacked">
+
+
+                <!-- Menu Vendas -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuVendas">
-                    <span class="glyphicon glyphicon-usd"></span> <strong>Vendas</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <span class="glyphicon glyphicon-usd"></span>
+                    <strong>Vendas</strong>
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
                     
-                    <ul class="nav nav-stacked collapse" id="menuVendas">
-                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Venda</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-object-align-right"></i> Estoque</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Vendas</a></li>
-                    </ul>
+                        <ul class="nav nav-stacked collapse" id="menuVendas">
+                            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Venda</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-object-align-right"></i> Estoque</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Vendas</a></li>
+                        </ul>
                 </li>
 
-                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuCompras">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> <strong>Compras</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
 
-                    <ul class="nav nav-stacked collapse" id="menuCompras">
-                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Compra</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-time"></i> Compras a Receber</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Compras</a></li>
-                    </ul>
+                <!-- Menu Compras -->
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuCompras">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <strong>Compras</strong>
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+
+                        <ul class="nav nav-stacked collapse" id="menuCompras">
+                            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Compra</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-time"></i> Compras a Receber</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Histórico de Compras</a></li>
+                        </ul>
                 </li>
                 
+
+                <!-- Menu Fluxo de Caixa -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuFluxo">
-                    <span class="glyphicon glyphicon-piggy-bank"></span> <strong>Fluxo de Caixa</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <span class="glyphicon glyphicon-piggy-bank"></span>
+                    <strong>Fluxo de Caixa</strong>
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
                     
-                    <ul class="nav nav-stacked collapse" id="menuFluxo">
-                        <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Movimento</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-th-list"></i> Consultar</a></li>
-                    </ul>
+                        <ul class="nav nav-stacked collapse" id="menuFluxo">
+                            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Movimento</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-th-list"></i> Consultar</a></li>
+                        </ul>
                 </li>
 
+
+                <!-- Menu Estatísticas -->
                 <li class="nav-header"><a href="#" data-toggle="collapse">
                     <span class="glyphicon glyphicon-stats"></span> <strong>Estatísticas</strong> </a>
                 </li>
             </ul>
-
             <hr>
+            <!-- FIM DOS MENUS DE GERENCIAMENTO -->
 
+
+
+            <!-- *********************************************** -->
+            <!-- ****** INÍCIO DOS MENUS DE CONFIGURAÇÕES ****** -->
+            <!-- *********************************************** -->
             <span id="menu-title"><i class="glyphicon glyphicon-wrench"></i> Configurações</span>
-
             <hr>
 
             <ul class="nav nav-stacked">
+
+
+                <!-- Menu Produtos -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuProdutos">
-                    <span class="glyphicon glyphicon-barcode"></span> <strong>Produtos</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
-                    <ul class="nav nav-stacked collapse" id="menuProdutos">
-                        <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                        <!-- Só mostra link de Cadastrar se o usuário for Admin -->
-                        <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
-                        <?php } ?>
-                        <li><a href="#"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
-                    </ul>
+                    <span class="glyphicon glyphicon-barcode"></span> 
+                    <strong>Produtos</strong> 
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+                        
+                        <ul class="nav nav-stacked collapse" id="menuProdutos">
+                            <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                            <!-- Só mostra link de Cadastrar e Categorias se o usuário for Admin -->
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
+                            <?php } ?>
+                        </ul>
                 </li>
 
+
+                <!-- Menu Clientes -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuClientes">
-                <span class="glyphicon glyphicon-user"></span> <strong>Clientes</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
-                    <ul class="nav nav-stacked collapse" id="menuClientes">
-                        <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                        <!-- Só mostra link de Cadastrar se o usuário for Admin -->
-                        <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
-                        <?php } ?>
-                    </ul>
+                    <span class="glyphicon glyphicon-user"></span> 
+                    <strong>Clientes</strong> 
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+                        
+                        <ul class="nav nav-stacked collapse" id="menuClientes">
+                            <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                            <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                            <?php } ?>
+                        </ul>
                 </li>
-                
+
+
+                <!-- Menu Usuários -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuUsuario">
                     <span class="glyphicon glyphicon-screenshot"></span> 
                     <strong>Usuários</strong> 
                     <i class="glyphicon glyphicon-chevron-down"></i></a>
-                        <!-- O código PHP dentro da próxima tag faz o menu Usuários ficar aberto enquanto quando dentro alguma de suas páginas-->
+                        
                         <ul class="nav nav-stacked collapse <?php if( ($menu=='UsuariosConsultar')||($menu=='UsuariosCadastrar') ){ echo "in"; } ?>" id="menuUsuario">
                             <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
                             <!-- Só mostra link de Cadastrar se o usuário for Admin -->
@@ -167,14 +208,15 @@ if( isset($_GET["page"]) ){
                     </ul>
                 </li>
             </ul>
+            <!-- FIM DOS MENUS DE CONFIGURAÇÕES -->
 
         </div>
-        <!-- /col-sm-3 -->
+        <!-- FIM DO MENU LATERAL ESQUERDO -->
 
 
-        <!-- **************************************************************************************** -->
-        <!-- ******************************* CONTEÚDO DA PÁGINA ************************************* -->
-        <!-- **************************************************************************************** -->
+        <!-- ************************************************************************ -->
+        <!-- ******************** CORPO DA PÁGINA (CONTEÚDO) ************************ -->
+        <!-- ************************************************************************ -->
         <div class="col-sm-9">
 
            <?php
@@ -192,10 +234,14 @@ if( isset($_GET["page"]) ){
            ?>
 
         </div>
+        <!-- FIM DO CORPO DA PÁGINA (CONTEÚDO) -->
+
+
     </div>
     <!-- /row -->
 </div>
 <!-- /container-fluid -->
+
 
 
 
