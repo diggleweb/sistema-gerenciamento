@@ -10,9 +10,15 @@ if( !isset($_SESSION["nome_usuario_logado"]) )
 	header('Location: index.php?ERRO=2');
 
 
-/* Testa qual menu está acionado para já deixá-lo aberto */
-if( isset($_GET["page"]) )
-    $menu = $_GET["page"];
+/* Pega variável de página "page"
+ * Não deixa usuário normal acessar aquelas páginas que só admin podem */
+if( isset($_GET["page"]) ){
+    if( $_SESSION["permissao_usuario_logado"] == 1 )
+        $menu = $_GET["page"];
+    elseif( ($_SESSION["permissao_usuario_logado"] == 0) && ($_GET["page"] != "UsuariosCadastrar") )
+            $menu = $_GET["page"];
+}
+
 
 ?>
 
@@ -128,7 +134,10 @@ if( isset($_GET["page"]) )
                     <span class="glyphicon glyphicon-barcode"></span> <strong>Produtos</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
                     <ul class="nav nav-stacked collapse" id="menuProdutos">
                         <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                        <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                        <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                        <?php } ?>
                         <li><a href="#"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
                     </ul>
                 </li>
@@ -137,15 +146,24 @@ if( isset($_GET["page"]) )
                 <span class="glyphicon glyphicon-user"></span> <strong>Clientes</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
                     <ul class="nav nav-stacked collapse" id="menuClientes">
                         <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                        <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                        <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuUsuario">
-                <span class="glyphicon glyphicon-screenshot"></span> <strong>Usuários</strong> <i class="glyphicon glyphicon-chevron-down"></i></a>
-                    <ul class="nav nav-stacked collapse <?php if( ($menu=='UsuariosConsultar')||($menu=='UsuariosCadastrar') ){ echo "in"; } ?>" id="menuUsuario">
-                        <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                        <li><a href="?page=UsuariosCadastrar"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                    <span class="glyphicon glyphicon-screenshot"></span> 
+                    <strong>Usuários</strong> 
+                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+                        <!-- O código PHP dentro da próxima tag faz o menu Usuários ficar aberto enquanto quando dentro alguma de suas páginas-->
+                        <ul class="nav nav-stacked collapse <?php if( ($menu=='UsuariosConsultar')||($menu=='UsuariosCadastrar') ){ echo "in"; } ?>" id="menuUsuario">
+                            <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                            <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                                <li><a href="?page=UsuariosCadastrar"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                            <?php } ?>
                     </ul>
                 </li>
             </ul>
@@ -160,7 +178,8 @@ if( isset($_GET["page"]) )
         <div class="col-sm-9">
 
            <?php
-                switch ($_GET["page"]) {
+                switch ($menu)
+                {
                     case "UsuariosConsultar":
                         include('_paginas/usuario_listagem.php');
                         break;
