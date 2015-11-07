@@ -196,10 +196,15 @@ require_once("_script/UsuarioDAO.php");
                 <!-- Menu Usuários -->
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuUsuario">
                     <span class="glyphicon glyphicon-screenshot"></span> 
-                    <strong>Usuários</strong> 
-                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <strong>Usuários</strong>
+                    <?php if( ($menu=='UsuariosConsultar') || ($menu=='UsuariosCadastrar') ){ ?>
+                        <i class="glyphicon glyphicon-chevron-up"></i></a> <?php
+                        $menuAberto = "in";
+                    }else{ ?>
+                        <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <?php } ?>
                         
-                        <ul class="nav nav-stacked collapse <?php if( ($menu=='UsuariosConsultar')||($menu=='UsuariosCadastrar') ){ echo "in"; } ?>" id="menuUsuario">
+                        <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)) echo $menuAberto; ?>" id="menuUsuario">
                             <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
                             <!-- Só mostra link de Cadastrar se o usuário for Admin -->
                             <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
