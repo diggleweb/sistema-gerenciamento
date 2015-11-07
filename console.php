@@ -2,6 +2,7 @@
 session_start("login");
 
 require_once("_script/UsuarioDAO.php");
+require_once("_script/CategoriaDAO.php");
 
 
     /* Testa se a variável de sessão está setada corretamente
