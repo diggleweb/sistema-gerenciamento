@@ -171,7 +171,7 @@ require_once("_script/UsuarioDAO.php");
                             <!-- Só mostra link de Cadastrar e Categorias se o usuário for Admin -->
                             <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
                                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
+                                <li><a href="?page=Categorias"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
                             <?php } ?>
                         </ul>
                 </li>
@@ -227,6 +227,9 @@ require_once("_script/UsuarioDAO.php");
            <?php
                 switch ($menu)
                 {
+                    case "Categorias":
+                        include('_paginas/categorias.php');
+                        break;
                     case "UsuariosConsultar":
                         include('_paginas/usuario_listagem.php');
                         break;
