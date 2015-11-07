@@ -99,6 +99,33 @@ class CategoriaDAO{
 
  		}
 
+ 		/* Função que lista todas as categorias existentes na tabela */
+ 		public function listar(){
+
+ 			//Faz acesso ao banco de dados
+ 			$list_query = "SELECT * FROM categorias";
+ 			$result = mysqli_query($this->conexao, $list_query) or die("Erro ao listar categorias: " . mysql_error() );
+
+ 			/* Cria um array que receberá as linhas da tabela */
+ 			$lista = array();
+
+ 			/* Loop que que vai pegando linha por linha do resultado obtido */
+ 			while( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) ){
+ 				//Cria nova instância da classe Categoria
+ 				$retorno = new Categoria();
+ 				//Preenche todos os campos do novo objeto
+ 				$retorno->idcategoria = $row["idcategoria"];
+ 				$retorno->categoria = $row["categoria"];
+ 				$retorno->idpai = $row["idpai"];
+ 				
+ 				//Coloca no array
+ 				$lista[] = $retorno;
+ 			}
+
+ 			return $lista;
+
+ 		}
+
  		/* Função que busca uma entrada na tabela Categorias e retorna o array preenchido com campos associados */
  		public function buscaPorId($id){
 
