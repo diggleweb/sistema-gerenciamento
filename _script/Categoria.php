@@ -12,7 +12,7 @@
 
 class Categoria{
 	public $idcategoria;
-	public $nome;
+	public $categoria;
 	public $idpai;
 }
 
