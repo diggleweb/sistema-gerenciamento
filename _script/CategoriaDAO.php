@@ -126,6 +126,73 @@ class CategoriaDAO{
 
  		}
 
+ 		//Função recursva que cria uma lista na tela em bootstrap com as categorias e subcategorias cadastradas no banco
+ 		public function listarCategorias($id, $nivel){
+ 			
+ 			//Se nenhum parâmetro foi passado inicialmente
+ 			if(!$id) $id = 0;
+ 			if(!$nivel) $nivel = 0;
+
+ 			//Faz acesso ao banco de dados
+ 			$query = "SELECT * FROM categorias WHERE idpai = ".$id;
+ 			$result = mysqli_query($this->conexao, $query) or die("Erro ao criar lista de categorias: " . mysql_error() );
+
+ 			//Laço iterativo e recursivo
+ 			$i = 0;
+ 			while( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) ){
+
+ 				//Se entrou em um novo nivel de subcategorias, incrementa nível (categorias primárias possuem nível 0)
+				if( ($row["idpai"] != 0) && ($i == 0) ) 
+ 					$nivel++;
+
+
+ 				//Se for mostrar a primeira categoria do nível 0, começa a <ul>
+ 				if( ($i == 0) && ($row["idpai"] == 0) )
+ 					echo "<ul class='nav nav-pills nav-stacked'>\n";
+ 				//Se for mostrar a primeira subcateria de qualquer outro nível, começa a <ul> com collapse e id
+ 				elseif( ($i == 0) && ($row["idpai"] != 0) ){
+ 					$idList = "subCats_Pai-".$row["idpai"];
+ 					echo "<ul class='nav nav-pills nav-stacked collapse' id='$idList'>\n";
+ 				}
+
+
+ 				//Verifica se a categoria em questão possui subcategorias
+ 				$possui_sub_cats = self::possuiSubCat( $row["idcategoria"] );
+
+
+ 				//Se for uma categoria primária e possuir subcategorias
+ 				if( ($row["idpai"] == 0) && $possui_sub_cats ){
+					$idSubList = "subCats_Pai-".$row["idcategoria"];
+					echo "<li class='active'><a href='#' data-toggle='collapse' data-target='#$idSubList'> <strong>".$row["categoria"]."</strong> </a>\n"; 					
+				}
+				//Se for uma categoria primaria e não possui subcategorias
+				elseif( ($row["idpai"] == 0) && !$possui_sub_cats ){
+					echo "<li class='active'><a href='#'> <strong>".$row["categoria"]."</strong> </a></li>\n";	
+				}
+				//Se for uma subcategoria e possuir subcategorias
+				elseif( ($row["idpai"] != 0) && $possui_sub_cats ){
+					$idSubList = "subCats_Pai-".$row["idcategoria"];
+					echo "<li><a href='#' data-toggle='collapse' data-target='#$idSubList'> ".$row["categoria"]." </a>\n"; 					
+				}
+				//Se for uma subcategoria e não possui subcategorias
+				elseif( ($row["idpai"] != 0) && !$possui_sub_cats ){
+					echo "<li><a href='#'> ".$row["categoria"]." </a></li>\n";	
+				}
+
+				//Se possuir subcategorias, faz um nova chamada recursiva para listar estas subcategorias
+				if( $possui_sub_cats ){
+ 					self::listarCategorias( $row["idcategoria"], $nivel );
+ 					echo "</li>\n";
+ 				}
+ 				//incrementa contador
+ 				$i++;
+ 			}
+
+ 			//finaliza lista <ul>
+ 			if($i > 0)
+ 				echo "</ul>\n";
+
+ 		}
 
  		/* Função que diz se a categoria tem pelo menos uma subcategoria */
  		public function possuiSubCat($id){
