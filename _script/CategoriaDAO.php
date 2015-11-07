@@ -126,6 +126,20 @@ class CategoriaDAO{
 
  		}
 
+
+ 		/* Função que diz se a categoria tem pelo menos uma subcategoria */
+ 		public function possuiSubCat($id){
+ 			
+ 			$query = "SELECT * FROM categorias WHERE idpai = ".$id;
+ 			$result = mysqli_query($this->conexao, $query) or die("Erro ao verificar se categoria possui subcategorias: " . mysql_error() );
+
+ 			if( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) )
+ 				return true;
+ 			else
+ 				return false;
+ 			
+ 		}
+
  		/* Função que busca uma entrada na tabela Categorias e retorna o array preenchido com campos associados */
  		public function buscaPorId($id){
 
@@ -307,6 +321,7 @@ class CategoriaDAO{
 	 		}
 	 		echo "</select>";
  		}
+
 }
 
 ?>
