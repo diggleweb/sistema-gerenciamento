@@ -164,14 +164,19 @@ require_once("_script/UsuarioDAO.php");
                 <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuProdutos">
                     <span class="glyphicon glyphicon-barcode"></span> 
                     <strong>Produtos</strong> 
-                    <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <?php if( ($menu=='ProdutosConsultar') || ($menu=='ProdutosCadastrar') || ($menu=='ProdutosCategorias') ){ ?>
+                        <i class="glyphicon glyphicon-chevron-up"></i></a> <?php
+                        $menuAberto = "in";
+                    }else{ ?>
+                        <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <?php } ?>
                         
-                        <ul class="nav nav-stacked collapse" id="menuProdutos">
+                        <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)){echo $menuAberto; $menuAberto = '';}?>" id="menuProdutos">
                             <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
                             <!-- Só mostra link de Cadastrar e Categorias se o usuário for Admin -->
                             <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
                                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
-                                <li><a href="?page=Categorias"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
+                                <li><a href="?page=ProdutosCategorias"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
                             <?php } ?>
                         </ul>
                 </li>
@@ -204,7 +209,7 @@ require_once("_script/UsuarioDAO.php");
                         <i class="glyphicon glyphicon-chevron-down"></i></a>
                     <?php } ?>
                         
-                        <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)) echo $menuAberto; ?>" id="menuUsuario">
+                        <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)){echo $menuAberto; $menuAberto = '';}?>" id="menuUsuario">
                             <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
                             <!-- Só mostra link de Cadastrar se o usuário for Admin -->
                             <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
@@ -227,7 +232,7 @@ require_once("_script/UsuarioDAO.php");
            <?php
                 switch ($menu)
                 {
-                    case "Categorias":
+                    case "ProdutosCategorias":
                         include('_paginas/categorias.php');
                         break;
                     case "UsuariosConsultar":
